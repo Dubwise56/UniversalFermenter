@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+    <name>[MS] Universal Fermenter</name>
+    <author>Mantrasong</author>
+    <supportedVersions>
+		<li>1.1</li>
+	</supportedVersions>
+	<packageId>Mantrasong.Fermenter.1</packageId>
+    <description>Adds a universal fermenter that supports multiple types of fermenting options</description>
+</ModMetaData>
