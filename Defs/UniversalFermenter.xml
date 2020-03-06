@@ -3,7 +3,7 @@
 
   <ThingDef ParentName="BuildingBase">
     <defName>UniversalFermenter</defName>
-    <label>fermenting barrel</label>
+    <label>fermenting barrel 2</label>
     <description>A barrel for fermenting plant matter.</description>
     <graphicData>
       <texPath>Things/Building/Production/FermentingBarrel</texPath>
@@ -48,15 +48,6 @@
 						<li>Wort</li>
 					</thingDefs>
 				</ingredientFilter>
-			</li>
-			<li>
-				<thingDef>BlueberryWine</thingDef>
-				<ingredientFilter>
-					<thingDefs>
-						<li>Mash</li>
-					</thingDefs>
-				</ingredientFilter>
-				<baseFermentationDuration>900000</baseFermentationDuration>
 			</li>
 		</products>
 	  </li>
