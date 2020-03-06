@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniversalFermenter", "UniversalFermenter\UniversalFermenter.csproj", "{5372EDE0-034E-43BD-9F46-024BD00055B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurvivalistsAdditions", "..\..\Survivalists-Additions\Source\SurvivalistsAdditions\SurvivalistsAdditions.csproj", "{E0F7363B-667C-477A-ADC6-D6CE9EA47439}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5372EDE0-034E-43BD-9F46-024BD00055B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5372EDE0-034E-43BD-9F46-024BD00055B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5372EDE0-034E-43BD-9F46-024BD00055B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0F7363B-667C-477A-ADC6-D6CE9EA47439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0F7363B-667C-477A-ADC6-D6CE9EA47439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0F7363B-667C-477A-ADC6-D6CE9EA47439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0F7363B-667C-477A-ADC6-D6CE9EA47439}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

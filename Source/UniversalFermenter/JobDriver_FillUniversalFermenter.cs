@@ -4,7 +4,7 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace UniversalFermenter
+namespace UniversalProcessors
 {
 
 	public class JobDriver_FillUniversalFermenter : JobDriver

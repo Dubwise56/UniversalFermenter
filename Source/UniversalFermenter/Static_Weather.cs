@@ -1,7 +1,7 @@
 using UnityEngine;
 using Verse;
 
-namespace UniversalFermenter
+namespace UniversalProcessors
 {
 	[StaticConstructorOnStartup]
 	public static class Static_Weather

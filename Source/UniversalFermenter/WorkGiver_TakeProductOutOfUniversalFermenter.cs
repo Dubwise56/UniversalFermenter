@@ -2,7 +2,7 @@
 using Verse;
 using Verse.AI;
 
-namespace UniversalFermenter
+namespace UniversalProcessors
 {
 
 	public class WorkGiver_TakeProductOutOfUniversalFermenter : WorkGiver_Scanner

@@ -39,7 +39,7 @@
         <maxSafeTemperature>32</maxSafeTemperature>
         <progressPerDegreePerTick>0.00001</progressPerDegreePerTick>
       </li>
-	  <li Class="UniversalFermenter.CompProperties_UniversalFermenter">
+	  <li Class="UniversalProcessors.CompProperties_UniversalFermenter">
 		<products>
 			<li>
 				<thingDef>Beer</thingDef>

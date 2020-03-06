@@ -1,7 +1,7 @@
 ﻿using Verse;
 using System.Collections.Generic;
 
-namespace UniversalFermenter
+namespace UniversalProcessors
 {
 
 	public class CompProperties_UniversalFermenter : CompProperties

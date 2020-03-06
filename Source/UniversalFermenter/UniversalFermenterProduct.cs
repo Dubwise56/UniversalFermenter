@@ -1,6 +1,6 @@
 using Verse;
 
-namespace UniversalFermenter
+namespace UniversalProcessors
 {
 	public class UniversalFermenterProduct
 	{

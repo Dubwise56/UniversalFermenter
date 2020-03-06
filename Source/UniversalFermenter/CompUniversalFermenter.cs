@@ -10,7 +10,7 @@ using UnityEngine;
 using RimWorld;
 using Verse;
 
-namespace UniversalFermenter
+namespace UniversalProcessors
 {
 
 	public class CompUniversalFermenter : ThingComp
