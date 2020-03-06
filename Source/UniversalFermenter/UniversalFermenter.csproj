@@ -57,18 +57,38 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompProperties_UniversalFermenter.cs" />
-    <Compile Include="CompUniversalFermenter.cs" />
-    <Compile Include="JobDriver_FillUniversalFermenter.cs" />
-    <Compile Include="JobDriver_TakeProductOutOfUniversalFermenter.cs" />
+    <Compile Include="Smoker\AI\JobDriver_FillProcessor.cs" />
+    <Compile Include="Smoker\AI\JobDriver_TakeItemOutOfProcessor.cs" />
+    <Compile Include="Smoker\AI\JobDriver_TendToSmoker.cs" />
+    <Compile Include="Smoker\AI\WorkGiver_FillProcessor.cs" />
+    <Compile Include="Smoker\AI\WorkGiver_TakeItemOutOfProcessor.cs" />
+    <Compile Include="Smoker\AI\WorkGiver_TendToSmoker.cs" />
+    <Compile Include="Smoker\Buildings\Building_CharcoalPit.cs" />
+    <Compile Include="Smoker\Buildings\Building_CheeseBarrel.cs" />
+    <Compile Include="Smoker\Buildings\Building_Smoker.cs" />
+    <Compile Include="Smoker\Buildings\Building_VinegarBarrel.cs" />
+    <Compile Include="Smoker\Components\CompProperties_Smoker.cs" />
+    <Compile Include="Smoker\Components\CompSmoker.cs" />
+    <Compile Include="Smoker\Interfaces\IItemProcessor.cs" />
+    <Compile Include="Smoker\Util\ITab_StockWatcher.cs" />
+    <Compile Include="Smoker\Util\NotificationType.cs" />
+    <Compile Include="Smoker\Util\SrvDefOf.cs" />
+    <Compile Include="Smoker\Util\SrvSettings.cs" />
+    <Compile Include="Smoker\Util\Static.cs" />
+    <Compile Include="Smoker\Util\ThingCountExposable.cs" />
+    <Compile Include="UniversalFermenter\CompProperties_UniversalFermenter.cs" />
+    <Compile Include="UniversalFermenter\CompUniversalFermenter.cs" />
+    <Compile Include="UniversalFermenter\JobDriver_FillUniversalFermenter.cs" />
+    <Compile Include="UniversalFermenter\JobDriver_TakeProductOutOfUniversalFermenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Static_Bar.cs" />
-    <Compile Include="Static_TexReloader.cs" />
-    <Compile Include="Static_Weather.cs" />
-    <Compile Include="UniversalFermenterProduct.cs" />
-    <Compile Include="Utils.cs" />
-    <Compile Include="WorkGiver_FillUniversalFermenter.cs" />
-    <Compile Include="WorkGiver_TakeProductOutOfUniversalFermenter.cs" />
+    <Compile Include="UniversalFermenter\Static_Bar.cs" />
+    <Compile Include="UniversalFermenter\Static_TexReloader.cs" />
+    <Compile Include="UniversalFermenter\Static_Weather.cs" />
+    <Compile Include="UniversalFermenter\UniversalFermenterProduct.cs" />
+    <Compile Include="UniversalFermenter\Utils.cs" />
+    <Compile Include="UniversalFermenter\WorkGiver_FillUniversalFermenter.cs" />
+    <Compile Include="UniversalFermenter\WorkGiver_TakeProductOutOfUniversalFermenter.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
