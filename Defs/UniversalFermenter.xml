@@ -3,7 +3,7 @@
 
   <ThingDef ParentName="BuildingBase">
     <defName>UniversalFermenter</defName>
-    <label>fermenting barrel 2</label>
+    <label>Universal Fermenter</label>
     <description>A barrel for fermenting plant matter.</description>
     <graphicData>
       <texPath>Things/Building/Production/FermentingBarrel</texPath>
