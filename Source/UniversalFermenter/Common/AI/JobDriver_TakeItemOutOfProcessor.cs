@@ -43,6 +43,7 @@ namespace UniversalProcessors
 
             // Verify processor validity
             this.FailOnDespawnedNullOrForbidden(ProcessorInd);
+            this.FailOnBurningImmobile(TargetIndex.A);
             this.FailOn(() => !comp.Fermented);
 
             // Reserve processor
@@ -63,7 +64,7 @@ namespace UniversalProcessors
                 {
                     Thing item = comp.TakeOutProduct();
                     GenPlace.TryPlaceThing(item, pawn.Position, Map, ThingPlaceMode.Near);
-                    StoragePriority storagePriority = StoreUtility.StoragePriorityAtFor(item.Position, item);
+                    StoragePriority storagePriority = StoreUtility.CurrentStoragePriorityOf(item);
 
                     // Try to find a suitable storage spot for the item
                     if (StoreUtility.TryFindBestBetterStoreCellFor(item, pawn, Map, storagePriority, pawn.Faction, out IntVec3 c))
