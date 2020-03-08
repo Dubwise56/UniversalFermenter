@@ -14,11 +14,11 @@ namespace UniversalProcessors
         private const TargetIndex ProcessorInd = TargetIndex.A;
         private const TargetIndex ItemInd = TargetIndex.B;
 
-        protected IItemProcessor Processor
+        protected Thing Processor
         {
             get
             {
-                return (IItemProcessor)job.GetTarget(TargetIndex.A).Thing;
+                return job.GetTarget(TargetIndex.A).Thing;
             }
         }
 
@@ -40,17 +40,19 @@ namespace UniversalProcessors
         protected override IEnumerable<Toil> MakeNewToils()
         {
 
+            CompUniversalFermenter comp = Processor.TryGetComp<CompUniversalFermenter>();
+
             // Verify processor and item validity
-            this.FailOn(() => Processor.SpaceLeftForItem <= 0);
+            this.FailOn(() => comp.SpaceLeftForIngredient <= 0);
             this.FailOnDespawnedNullOrForbidden(ProcessorInd);
             this.FailOnBurningImmobile(ProcessorInd);
             this.FailOn(() => (Item.TryGetComp<CompRottable>() != null && Item.TryGetComp<CompRottable>().Stage != RotStage.Fresh));
-            AddEndCondition(() => (Processor.SpaceLeftForItem > 0) ? JobCondition.Ongoing : JobCondition.Succeeded);
+            AddEndCondition(() => (comp.SpaceLeftForIngredient > 0) ? JobCondition.Ongoing : JobCondition.Succeeded);
 
             // Reserve resources
             yield return Toils_General.DoAtomic(delegate
             {
-                job.count = Processor.SpaceLeftForItem;
+                job.count = comp.SpaceLeftForIngredient;
             });
             Toil reserveItem = Toils_Reserve.Reserve(ItemInd);
             yield return reserveItem;
@@ -84,7 +86,7 @@ namespace UniversalProcessors
             {
                 initAction = () =>
                 {
-                    int amountAccepted = Processor.AddItem(Item);
+                    int amountAccepted = comp.AddIngredient(Item);
                     if (amountAccepted <= 0)
                     {
                         EndJobWith(JobCondition.Incompletable);

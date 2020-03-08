@@ -419,31 +419,49 @@ namespace UniversalProcessors
 			}
 		}
 
-		public bool AddIngredient(Thing ingredient)
+        public bool TemperatureAcceptable
+        {
+            get
+            {
+                float ambientTemperature = parent.AmbientTemperature;
+                if (ambientTemperature < Product.temperatureSafe.min + 2f || ambientTemperature > Product.temperatureSafe.max - 2f)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        /**
+         *  Returns the amount accepted of the ingredient, or 0 if incompatible
+         */
+        public int AddIngredient(Thing ingredient)
 		{
+
 			if (!Product.ingredientFilter.Allows(ingredient))
 			{
-				return false;
+				return 0;
 			}
 			if (!ingredientLabels.Contains(ingredient.def.label))
 				ingredientLabels.Add(ingredient.def.label);
-			AddIngredient(ingredient.stackCount);
-			ingredient.Destroy(DestroyMode.Vanish);
-			return true;
+			int accepted = AddIngredient(ingredient.stackCount);
+
+			return accepted;
+
 		}
 
-		public void AddIngredient(int count)
+		private int AddIngredient(int count)
 		{
 			ruinedPercent = 0f;
 			if (Fermented)
 			{
 				Log.Warning("Universal Fermenter:: Tried to add ingredient to a fermenter full of product. Colonists should take the product first.");
-				return;
+				return 0;
 			}
 			int num = Mathf.Min(count, Product.maxCapacity - ingredientCount);
 			if (num <= 0)
 			{
-				return;
+				return 0;
 			}
 			Progress = GenMath.WeightedAverage(0f, num, Progress, ingredientCount);
 			if (Empty)
@@ -451,6 +469,7 @@ namespace UniversalProcessors
 				GraphicChange(false);
 			}
 			ingredientCount += num;
+            return num;
 		}
 
 		public Thing TakeOutProduct()

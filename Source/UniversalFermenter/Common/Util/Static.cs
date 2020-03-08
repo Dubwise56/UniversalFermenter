@@ -40,7 +40,7 @@ namespace UniversalProcessors
         public static string ToolTip_Snare_NotificationType = "SRV_ToolTip_Snare_NotificationType".Translate();
         public static string ToolTip_GenStep_PlantDensity = "SRV_ToolTip_GenStep_PlantDensity".Translate();
 
-        public static Graphic Graphic_CharcoalPitFilled = GraphicDatabase.Get<Graphic_Single>("Cupro/Object/Utility/CharcoalPit/FullPit", ShaderDatabase.DefaultShader, new Vector2(3, 3), Color.white);
+        //public static Graphic Graphic_CharcoalPitFilled = GraphicDatabase.Get<Graphic_Single>("Cupro/Object/Utility/CharcoalPit/FullPit", ShaderDatabase.DefaultShader, new Vector2(3, 3), Color.white);
 
         public static readonly Material BarUnfilledMat_Generic = SolidColorMaterials.SimpleSolidColorMaterial(new Color(0.2f, 0.22f, 0.22f), false);
         public static readonly Vector2 BarSize_Generic = new Vector2(0.55f, 0.1f);

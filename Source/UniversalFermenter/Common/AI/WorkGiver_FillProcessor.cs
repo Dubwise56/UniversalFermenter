@@ -27,32 +27,34 @@ namespace UniversalProcessors
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
             // If the processors isn't finished or is full, there is no job
-            if (!(t is IItemProcessor workThing) || workThing.Finished || workThing.SpaceLeftForItem <= 0)
+            CompUniversalFermenter comp = t.TryGetComp<CompUniversalFermenter>();
+
+            if (comp == null || comp.Fermented || comp.SpaceLeftForIngredient <= 0)
             {
                 return false;
             }
 
             //if the temperature is bad
-            if (!workThing.TemperatureAcceptable)
+            if (!comp.TemperatureAcceptable)
             {
                 JobFailReason.Is(Static.TemperatureTrans);
                 return false;
             }
 
-            if(!workThing.checkCanAdd())
-            {
-                // TODO figure out how to remove/abstract this
-                //if (t is Building_Smoker smoker)
-                //{
+            //if(!workThing.checkCanAdd())
+            //{
+            //    // TODO figure out how to remove/abstract this
+            //    //if (t is Building_Smoker smoker)
+            //    //{
 
-                //    if (!smoker.CanAddFood)
-                //    {
-                //        JobFailReason.Is(Static.SmokerLocked);
-                //        return false;
-                //    }
-                //}
-                return false;
-            }
+            //    //    if (!smoker.CanAddFood)
+            //    //    {
+            //    //        JobFailReason.Is(Static.SmokerLocked);
+            //    //        return false;
+            //    //    }
+            //    //}
+            //    return false;
+            //}
 
             if (t.IsForbidden(pawn) || !pawn.CanReserveAndReach(t, PathEndMode.Touch, pawn.NormalMaxDanger(), 1, -1, null, forced))
             {
@@ -62,7 +64,7 @@ namespace UniversalProcessors
             {
                 return false;
             }
-            if (FindIngredient(pawn, workThing) == null)
+            if (FindIngredient(pawn, t) == null)
             {
                 JobFailReason.Is(Static.NoIngredient);
                 return false;
@@ -73,21 +75,22 @@ namespace UniversalProcessors
 
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            IItemProcessor workThing = t as IItemProcessor;
-            Thing t2 = FindIngredient(pawn, workThing);
-            return new Job(SrvDefOf.SRV_FillProcessor, t, t2)
+            CompUniversalFermenter comp = t.TryGetComp<CompUniversalFermenter>();
+            Thing t2 = FindIngredient(pawn, t);
+            return new Job(DefDatabase<JobDef>.GetNamed("FillProcessor"), t, t2)
             {
-                count = workThing.SpaceLeftForItem
+
+                count = comp.SpaceLeftForIngredient
             };
         }
 
 
-        private Thing FindIngredient(Pawn pawn, IItemProcessor workThing)
+        private Thing FindIngredient(Pawn pawn, Thing workThing)
         {
-            ThingFilter filter = workThing.ingredientFilter;
+            ThingFilter filter = workThing.TryGetComp<CompUniversalFermenter>().Product.ingredientFilter;
             Predicate<Thing> validator = (Thing x) => !x.IsForbidden(pawn) && pawn.CanReserve(x) && filter.Allows(x);
 
-            return GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, workThing.InputRequest, PathEndMode.ClosestTouch, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), 9999f, validator);
+            return GenClosest.ClosestThingReachable(pawn.Position, pawn.Map, filter.BestThingRequest, PathEndMode.ClosestTouch, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), 9999f, validator);
         }
     }
 }

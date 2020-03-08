@@ -27,8 +27,8 @@ namespace UniversalProcessors
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            return t is IItemProcessor workThing 
-                && workThing.Finished 
+            CompUniversalFermenter comp = t.TryGetComp<CompUniversalFermenter>();
+            return (comp != null && comp.Fermented)
                 && !t.IsBurning()
                 && !t.IsForbidden(pawn)
                 && pawn.CanReserveAndReach(t, PathEndMode.Touch, pawn.NormalMaxDanger(), 1, -1, null, forced);
@@ -37,7 +37,7 @@ namespace UniversalProcessors
 
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            return new Job(SrvDefOf.SRV_TakeItemOutOfProcessor, t);
+            return new Job(DefDatabase<JobDef>.GetNamed("TakeItemOutOfProcessor"), t);
         }
     }
 }

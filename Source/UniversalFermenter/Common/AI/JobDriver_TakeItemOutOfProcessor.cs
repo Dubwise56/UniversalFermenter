@@ -14,11 +14,11 @@ namespace UniversalProcessors
         private const TargetIndex ItemToHaulInd = TargetIndex.B;
         private const TargetIndex StorageCellInd = TargetIndex.C;
 
-        protected IItemProcessor Processor
+        protected Thing Processor
         {
             get
             {
-                return (IItemProcessor)job.GetTarget(TargetIndex.A).Thing;
+                return job.GetTarget(TargetIndex.A).Thing;
             }
         }
 
@@ -39,10 +39,11 @@ namespace UniversalProcessors
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
+            CompUniversalFermenter comp = Processor.TryGetComp<CompUniversalFermenter>();
 
             // Verify processor validity
             this.FailOnDespawnedNullOrForbidden(ProcessorInd);
-            this.FailOn(() => !Processor.Finished);
+            this.FailOn(() => !comp.Fermented);
 
             // Reserve processor
             yield return Toils_Reserve.Reserve(ProcessorInd);
@@ -51,7 +52,7 @@ namespace UniversalProcessors
             yield return Toils_Goto.GotoThing(ProcessorInd, PathEndMode.ClosestTouch);
 
             // Add delay for collecting items from the processor
-            yield return Toils_General.Wait(Static.GenericWaitDuration) // TODO replace with item/recipe duration
+            yield return Toils_General.Wait(Static.GenericWaitDuration)
                       .FailOnDestroyedNullOrForbidden(ProcessorInd)
                       .WithProgressBarToilDelay(ProcessorInd);
 
@@ -60,7 +61,7 @@ namespace UniversalProcessors
             {
                 initAction = () =>
                 {
-                    Thing item = Processor.TakeOutProduct();
+                    Thing item = comp.TakeOutProduct();
                     GenPlace.TryPlaceThing(item, pawn.Position, Map, ThingPlaceMode.Near);
                     StoragePriority storagePriority = StoreUtility.StoragePriorityAtFor(item.Position, item);
 
